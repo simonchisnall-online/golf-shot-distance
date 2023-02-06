@@ -19,8 +19,14 @@ import {
   TouchableOpacity
 } from "react-native";
 
+import Geolocation from "@react-native-community/geolocation";
+
 import { Colors } from "react-native/Libraries/NewAppScreen";
 import Header from "./components/Header";
+
+const getCurrentLocation = async () => {
+  Geolocation.getCurrentPosition((info) => console.log(info));
+};
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === "dark";
@@ -28,6 +34,8 @@ function App(): JSX.Element {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter
   };
+
+  const onPress = () => console.log("hello simon");
 
   return (
     <SafeAreaView style={backgroundStyle}>
@@ -42,7 +50,10 @@ function App(): JSX.Element {
         <Header />
         <View style={styles.container}>
           <View style={styles.top}>
-            <TouchableOpacity style={styles.appButtonContainer}>
+            <TouchableOpacity
+              style={styles.appButtonContainer}
+              onPress={getCurrentLocation}
+            >
               <Text style={styles.appButtonText}>From</Text>
             </TouchableOpacity>
           </View>
